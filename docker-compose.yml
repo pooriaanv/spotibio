@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    container_name: spotibio-app
+    build: ./app
+    volumes:
+      - app-volume:/app
+
+  cron:
+    container_name: spotibio-cron
+    build: ./cron
+    volumes:
+      - app-volume:/app
+    restart: always
+
+volumes:
+  app-volume:
