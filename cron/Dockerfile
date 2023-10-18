@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-RUN apt-get update && apt-get install cron -y && apt-get install ca-certificates -y
+RUN apt-get update && apt-get install cron -y && apt-get install ca-certificates -y && apt-get install tzdata -y
 
 COPY cronfile /etc/cron.d/cronfile
 
