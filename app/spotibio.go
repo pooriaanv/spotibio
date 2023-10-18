@@ -80,6 +80,10 @@ func main() {
 	} else {
 		listeningTo = beautifyListeningTo(*playingSong)
 		fmt.Println(logTime + " - Listening to: " + listeningTo)
+
+		if checkIfWasNotListening() {
+			flagAsListening()
+		}
 	}
 
 	description := makeDescription(listeningTo)
@@ -106,6 +110,12 @@ func flagAsNotListening() {
 	}
 
 	fmt.Println("Flagged as not listening")
+}
+
+func flagAsListening() {
+	_ = os.RemoveAll("notListening")
+
+	fmt.Println("Flagged as listening")
 }
 
 func beautifyListeningTo(song PlayingSong) string {
