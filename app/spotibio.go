@@ -12,6 +12,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type PlayingSong struct {
@@ -59,6 +60,8 @@ func main() {
 		fmt.Println("Error loading .env file")
 		panic(err)
 	}
+	loc, _ := time.LoadLocation(os.Getenv("TIMEZONE"))
+	logTime := time.Now().In(loc).Format("2006-01-02 15:04:05")
 
 	var listeningTo string
 	playingSong, err := getCurrentPlayingSong()
@@ -67,7 +70,7 @@ func main() {
 	}
 
 	if playingSong == nil {
-		fmt.Println("Not listening to music.")
+		fmt.Println(logTime + " - Not listening to music.")
 		if checkIfWasNotListening() {
 			fmt.Println("Nothing to update.")
 			return
@@ -76,7 +79,7 @@ func main() {
 		}
 	} else {
 		listeningTo = beautifyListeningTo(*playingSong)
-		fmt.Println("Listening to: " + listeningTo)
+		fmt.Println(logTime + " - Listening to: " + listeningTo)
 	}
 
 	description := makeDescription(listeningTo)
