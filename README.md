@@ -26,7 +26,7 @@ bash start.sh
 ```
 There are two containers, `spotibio-app` and `spotibio-cron`.
 
-`spotibio-cron` handles cronjob and executes the script **every 3 minutes**.
+`spotibio-cron` handles cronjob and executes the script **every 2 minutes**.
 ## More Options
 
 #### Default Twitter bio:
