@@ -13,6 +13,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+  b64 "encoding/base64"
 )
 
 type PlayingSong struct {
@@ -180,7 +181,8 @@ func getSpotifyAccessToken() (*string, error) {
 
 	client := &http.Client{}
 	req, _ := http.NewRequest("POST", "https://accounts.spotify.com/api/token", strings.NewReader(encodedData))
-	req.Header.Add("Authorization", fmt.Sprintf("Basic %v", os.Getenv("SPOTIFY_CLIENT_ID")))
+	// req.Header.Add("Authorization", fmt.Sprintf("Basic %v", os.Getenv("SPOTIFY_CLIENT_ID")))
+  req.Header.Add("Authorization", fmt.Sprintf("Basic %v", b64.StdEncoding.EncodeToString([]byte(os.Getenv("SPOTIFY_CLIENT_ID") + ":" + os.Getenv("SPOTIFY_CLIENT_SECRET")))))
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("Content-Length", strconv.Itoa(len(encodedData)))
 
